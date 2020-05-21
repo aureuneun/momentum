@@ -27,7 +27,7 @@ const handleToDosSubmit = (e) => {
   toDoInput.value = "";
 };
 
-const paintToDo = (text) => {
+const paintToDo = (text, id) => {
   const li = document.createElement("li");
   const delBtn = document.createElement("button");
   delBtn.innerHTML = "❌";
@@ -36,11 +36,11 @@ const paintToDo = (text) => {
   span.innerHTML = text;
   li.appendChild(delBtn);
   li.appendChild(span);
-  const id = toDos.length === 0 ? 1 : toDos[toDos.length - 1].id + 1;
-  li.id = id;
+  const newId = id ? id : Date.now();
+  li.id = newId;
   toDoList.appendChild(li);
   const toDoObj = {
-    id,
+    id: newId,
     text,
   };
   toDos.push(toDoObj);
@@ -50,7 +50,7 @@ const loadToDos = () => {
   const loadedToDos = localStorage.getItem(TODOS_LS);
   if (loadedToDos) {
     const parsedToDos = JSON.parse(loadedToDos);
-    parsedToDos.forEach((toDo) => paintToDo(toDo.text));
+    parsedToDos.forEach((toDo) => paintToDo(toDo.text, toDo.id));
     saveToDos();
   }
 };
