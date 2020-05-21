@@ -1,5 +1,5 @@
-const form = document.querySelector(".js-userForm");
-const input = form.querySelector("input");
+const userForm = document.querySelector(".js-userForm");
+const userInput = userForm.querySelector("input");
 const greeting = document.querySelector(".js-greeting");
 
 const USER_LS = "user";
@@ -11,26 +11,26 @@ const saveUser = (text) => {
 
 const handleUserSubmit = (e) => {
   e.preventDefault();
-  const value = input.value;
+  const value = userInput.value;
   paintGreeting(value);
   saveUser(value);
 };
 
 const askForUser = () => {
-  form.classList.add(SHOWING_CN);
-  form.addEventListener("submit", handleUserSubmit);
+  userForm.classList.add(SHOWING_CN);
+  userForm.addEventListener("submit", handleUserSubmit);
 };
 
 const paintGreeting = (text) => {
-  form.classList.remove(SHOWING_CN);
+  userForm.classList.remove(SHOWING_CN);
   greeting.classList.add(SHOWING_CN);
   greeting.innerHTML = `Hello ${text}`;
 };
 
 const loadUser = () => {
-  const currentUser = localStorage.getItem(USER_LS);
-  if (currentUser) {
-    paintGreeting(currentUser);
+  const loadedUser = localStorage.getItem(USER_LS);
+  if (loadedUser) {
+    paintGreeting(loadedUser);
   } else {
     askForUser();
   }
