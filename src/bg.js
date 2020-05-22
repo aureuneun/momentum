@@ -47,7 +47,6 @@ const loadBgImage = () => {
     const parsedImage = JSON.parse(loadedImage);
     const today = new Date();
     const expires = new Date(parsedImage.expires);
-    console.log(today, expires);
     if (today > expires) {
       getBgImage();
     } else {
